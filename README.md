@@ -4,7 +4,7 @@
 ![](https://img.shields.io/badge/Ruby-red)
 
 # Building The Tic-Tac-Toe Game With Ruby
-How The Game works
+How The Game Works
 - Two players are involved in the game
 - They start with an empty nine spaces in the board
 - Players will take the turn to put a marker on the board
@@ -16,7 +16,7 @@ How The Game works
 
 ## Built With
 
-- ![](https://img.shields.io/badge/RubyOOP-red)
+- ![](https://img.shields.io/badge/OOP-Ruby-red)
 
 
 ##  Setting Up The Game In Bin
@@ -36,7 +36,7 @@ def display_board(board) <br>
   puts "-----------" <br>
   puts " # | # | # " <br>
   puts "-----------" <br>
-  puts " # | # | # " 
+  puts " # | # | # " <br>
 end
 
 ## Author
