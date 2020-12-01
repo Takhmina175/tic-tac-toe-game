@@ -1,65 +1,85 @@
 #!/usr/bin/env ruby
 puts "Hello World!"
-class Player
-    attr_accessor :board
-  
-    def initialize
-      @board = [" ", " ", " ", " ", " ", " ", " ", " ", " "]
-    end
+class Test
+  attr_accessor :board, :input
 
-    def display_board
+  def initialize
+      @input = input
+      @board = [" ", " ", " ", " ", " ", " ", " ", " ", " "]
+  end
+
+  def display_board
       puts " #{@board[0]} | #{@board[1]} | #{@board[2]} "
       puts " ----------- "
       puts " #{@board[3]} | #{@board[4]} | #{@board[5]} "
       puts " ----------- "
       puts " #{@board[6]} | #{@board[7]} | #{@board[8]} "
-    end   
-
-def turn?(num)
-  if num < 0 || num > 8 
-    user_input
-  elsif position_taken?(num)
-    puts "position is already taken choose another number"
-    user_input
-  elsif turn_count() % 2 == 0
-    @board[num] = "X"
-  else
-    @board[num] = "O"
   end
-end
 
-def winner?(curr_player)
-  if @board[0] == curr_player && @board[1] == curr_player && @board[2] == curr_player
+  def player_input
+    puts "Choose a spot"
+    @input = gets.chomp.to_i-1 
+    current_player(@input, token = 'X')
+    turn(@input) 
   end
-end
 
-def turn_count
-  taken = 0
-  @board.each do |i|
-    if i == "X" || i == "O"
-      taken += 1
+  def turn(num)
+    if turn_count() % 2 == 0
+      @board[num] = "X"
+    else
+      @board[num] = "O"
     end
   end
-  return taken
-end
 
-def position_taken?(input)
-  @board[input] == "X" || @board[input] == "O"
-end
-
-def user_input
-  puts "Choose a spot"
-  input = gets.chomp.to_i-1 
-  if turn?(input)
-    display_board
-  elsif winner?(input)
-    puts "You won the game"
+  def turn_count
+    taken = 0
+    @board.each do |i|
+      if i == "X" || i == "O"
+        taken += 1
+      end
+    end
+    return taken
   end
-  user_input
+    
+  def current_player(index, token = 'X')
+    @board[index] = token
+  end
+
+
+  def check_position?(index)
+      @board[index] == "X" ||  @board[index] == "O" 
+  end
+
+  def valid_move?(index)
+     index.between?(0, 8) && !check_position?(index)
+  end
+
+  def check_valid_pos?
+    if check_position?(@input) || !valid_move?(@input)
+      puts "Enter a valid number"
+    end
+  end
+
+def wining?
+ if @board[0] == "X" && @board[1] == "X" && @board[2] == "X" ||
+    @board[3] == "X" && @board[4] == "X" && @board[5] == "X" ||
+    @board[6] == "X" && @board[7] == "X" && @board[8] == "X"
+    puts "You won"
+else
+check
 end
-  
 end
-player = Player.new
-player.user_input
+
+  def check
+      player_input
+      check_valid_pos?
+      display_board
+      wining?
+  end
+
+end
+
+ game = Test.new
+ game.check
 
 
