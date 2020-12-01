@@ -34,16 +34,16 @@ How The Game works
 - When all 9 squares are full, the game is over either by draw or by a player winning.
 
 ## Setting Up The Board
-puts "Welcome to Tic Tac Toe!"
+puts "Welcome to Tic Tac Toe!" \n
 board = [" ", " ", " ", " ", " ", " ", " ", " ", " "]
 
 
-def display_board(board)
-  puts " # | # | # "
-  puts "-----------"
-  puts " # | # | # "
-  puts "-----------"
-  puts " # | # | # "
+def display_board(board) \n
+  puts " # | # | # " \n
+  puts "-----------" \n
+  puts " # | # | # " \n
+  puts "-----------" \n
+  puts " # | # | # " \n
 end
 
 ## Author
