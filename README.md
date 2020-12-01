@@ -26,24 +26,17 @@ How The Game works
 - Create a main.rb file in the bin directory and run it with `./main.rb.` 
 
 
-## Rules of the game
-
-- The game is played on a grid that's 3 squares by 3 squares
-- One player is X and the other is O
-- The first player to get 3 of either X or O marks in a row (up, down, across, or diagonally) is the winner
-- When all 9 squares are full, the game is over either by draw or by a player winning.
-
 ## Setting Up The Board
-puts "Welcome to Tic Tac Toe!" \n
+puts "Welcome to Tic Tac Toe!" <br>
 board = [" ", " ", " ", " ", " ", " ", " ", " ", " "]
 
 
-def display_board(board) \n
-  puts " # | # | # " \n
-  puts "-----------" \n
-  puts " # | # | # " \n
-  puts "-----------" \n
-  puts " # | # | # " \n
+def display_board(board) <br>
+  puts " # | # | # " <br>
+  puts "-----------" <br>
+  puts " # | # | # " <br>
+  puts "-----------" <br>
+  puts " # | # | # " 
 end
 
 ## Author
