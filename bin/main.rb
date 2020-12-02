@@ -1,11 +1,11 @@
 #!/usr/bin/env ruby
-puts "Hello World!"
+puts 'Hello World!'
 class Test
   attr_accessor :board, :input
 
   def initialize
       @input = input
-      @board = [" ", " ", " ", " ", " ", " ", " ", " ", " "]
+      @board = [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ']
   end
 
   def display_board
@@ -24,21 +24,21 @@ class Test
   end
 
   def turn(num)
-    if turn_count() % 2 == 0
-      @board[num] = "X"
+    if (turn_count() % 2).zero?
+      @board[num] = 'X'
     else
-      @board[num] = "O"
+      @board[num] = 'O'
     end
   end
 
   def turn_count
     taken = 0
     @board.each do |i|
-      if i == "X" || i == "O"
+      if i.include?('X') || i.include?('O') 
         taken += 1
       end
     end
-    return taken
+    taken
   end
     
   def current_player(index, token = 'X')
@@ -51,23 +51,24 @@ class Test
   end
 
   def valid_move?(index)
-     index.between?(0, 8) && !check_position?(index)
+     if index.between?(0, 8) && !check_position?(index)
+     end
   end
 
   def check_valid_pos?
     if check_position?(@input) || !valid_move?(@input)
-      puts "Enter a valid number"
+      puts 'Enter a valid number'
     end
   end
 
 def wining?
- if @board[0] == "X" && @board[1] == "X" && @board[2] == "X" ||
-    @board[3] == "X" && @board[4] == "X" && @board[5] == "X" ||
-    @board[6] == "X" && @board[7] == "X" && @board[8] == "X"
-    puts "You won"
-else
-check
-end
+  if @board[0] == 'X' && @board[1] == 'X' && @board[2] == 'X'|| 
+    @board[3] == 'X' && @board[4] == 'X' && @board[5] == 'X'|| 
+    @board[6] == 'X' && @board[7] == 'X' && @board[8] == 'X'
+      puts 'You won'
+  else
+    check
+  end
 end
 
   def check
@@ -79,7 +80,5 @@ end
 
 end
 
- game = Test.new
+ game=Test.new
  game.check
-
-
