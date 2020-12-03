@@ -1,6 +1,4 @@
 #!/usr/bin/env ruby
-# frozen_string_literal: true
-
 puts 'Hello World!'
 class Test
   attr_accessor :board, :input
@@ -21,7 +19,7 @@ class Test
   def player_input
     puts 'Choose a spot'
     @input = gets.chomp.to_i - 1
-    current_player(@input, token = 'X')
+    current_player(@input)
     turn(@input)
   end
 
@@ -36,13 +34,15 @@ class Test
   def turn_count
     taken = 0
     @board.each do |i|
-      taken += 1 if i.include?('X') || i.include?('O')
+      taken += 1
+      if i.include?('X') || i.include?('O')
+      end
     end
     taken
   end
 
-  def current_player(index, token = 'X')
-    @board[index] = token
+  def current_player(index)
+    @board[index] = 'X'
   end
 
   def check_position?(index)
@@ -55,19 +55,24 @@ class Test
   end
 
   def check_valid_pos?
-    if check_position?(@input) || !valid_move?(@input)
-      puts 'Enter a valid number'
-    end
+    return unless check_position?(@input) || !valid_move?(@input)
+
+    puts 'Enter a valid number'
   end
 
   def wining?
-    if @board[0] == 'X' && @board[1] == 'X' && @board[2] == 'X' ||
-       @board[3] == 'X' && @board[4] == 'X' && @board[5] == 'X' ||
-       @board[6] == 'X' && @board[7] == 'X' && @board[8] == 'X'
-      puts 'You won'
-    else
-      check
+    WIN_COMBINATION.each do |single_win|
+      win_index1 = single_win[0]
+      win_index2 = single_win[1]
+      win_index3 = single_win[2]
+
+      position1 = @board[win_index1]
+      position2 = @board[win_index2]
+      position3 = @board[win_index3]
+
+      return single_win if position1 == position2 && position2 == position3
     end
+    false
   end
 
   def check
