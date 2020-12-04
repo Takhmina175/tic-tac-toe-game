@@ -34,7 +34,7 @@ class Player
     end
   end
 
-  def turn
+  def player_input
     puts 'Choose a spot'
     input = gets.chomp.to_i - 1
 
@@ -43,16 +43,16 @@ class Player
 
     elsif input.negative? || input > 8
       puts 'Enter number in the range of 1-9'
-      turn
+      player_input
 
     elsif position_taken?(input)
       puts 'Position is already taken choose another number'
-      turn
+      player_input
     elsif player_turn(input)
       display_board
-      turn
+      player_input
     end
   end
 end
 player = Player.new
-player.turn
+player.player_input
