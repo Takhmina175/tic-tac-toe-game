@@ -1,11 +1,8 @@
 #!/usr/bin/env ruby
-puts 'Hello World!'
 class Test
-  attr_accessor :board, :input, :x, :o
+  attr_accessor :board, :input
 
   def initialize
-    @x = x
-    @o = o
     @input = input
     @board = [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ']
   end
