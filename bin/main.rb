@@ -1,12 +1,24 @@
 #!/usr/bin/env ruby
 class Game
-  attr_accessor :board, :x, :y, :player
+
+  attr_accessor :board, :curr_player, :curr_input
 
   def initialize
-    @player_x = x
-    @player_y = y
     @board = [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ']
+    @curr_player = curr_player
+    @curr_input = 'X'
   end
+
+  WIN_DIAGONAL = [
+  [0, 4, 8],
+  [2, 4, 6]
+  ]
+
+  WIN_VERTICAL = [
+  [0, 3, 6],
+  [1, 4, 7],
+  [2, 5, 8]
+  ]
 
   def display_board
     puts " #{@board[0]} | #{@board[1]} | #{@board[2]} "
@@ -16,65 +28,79 @@ class Game
     puts " #{@board[6]} | #{@board[7]} | #{@board[8]} "
   end
 
+  
   def players_name
-    puts 'Hi player1, what is your name?'
-    @player_x = gets.chomp
+      puts "Hi player1, what is your name?"
+        @player_x = gets.chomp
 
-    puts 'Hi player2, what is your name?'
-    @player_y = gets.chomp
-
-    @current_player = @player_x
-    player_input
-  end
-
-  def switch_players
-    @current_player = if @current_player == @player_x
-                        @player_y
-                      else
-                        @player_x
-                      end
-    player_input
-  end
-
-  def player_turn(num)
-    @board[num] = if (num % 2).zero?
-                    'O'
-                  else
-                    'X'
-                  end
-  end
-
-  def position_taken?(input)
-    @board[input] == 'X' || @board[input] == 'O'
-  end
-
-  def full?
-    if @board.any? { |index| index.nil? || index == ' ' }
-      false
-    else
-      true
-    end
+      puts "Hi player2, what is your name?"
+        @player_y = gets.chomp
+        @curr_player = @player_y 
+        play
   end
 
   def player_input
-    puts "#{@current_player} choose a spot"
-    input = gets.chomp.to_i - 1
+    switch_names
+    puts "#{@curr_player} choose a spot"
+    index = gets.chomp.to_i - 1
+    @board[index] = @curr_input
+    display_board
+  end
 
-    if full?
-      puts 'Board is full'
+  def switch_names
+    if @curr_player == @player_x 
+        @curr_player = @player_y
+    else
+      @curr_player = @player_x
+    end
+  end
 
-    elsif input.negative? || input > 8
-      puts 'Enter number within a range of 1-9'
+  def switch_input
+    if @curr_input == 'X'
+        @curr_input = 'O'
+    else
+      @curr_input = 'X'
+    end
+  end
+
+  def horizontals?
+    @board.all? { |i| @board[0][i] == @board[1][i] && @board[1][i] == @board[2][i] }
+  end
+
+  def diagonals?
+    arr_diagonal_1 = []
+    arr_diagonal_2 = []
+    arr_diagonal_1 = WIN_DIAGONAL[0]
+    arr_diagonal_2 = WIN_DIAGONAL[1]
+    diagonal_1 = arr_diagonal_1.all? {|i| board[i] == "X" || board[i] == "O"}
+    diagonal_2 = arr_diagonal_2.all? {|i| board[i] == "X" || board[i] == "O"}
+
+    return true if diagonal_1 || diagonal_2 
+  end
+
+  def verticals?
+    arr_vertical_1 = []
+    arr_vertical_2 = []
+    arr_vertical_1 = WIN_VERTICAL[0]
+    arr_vertical_2 = WIN_VERTICAL[1]
+    arr_vertical_3 = WIN_VERTICAL[2]
+    vertical_1 = arr_vertical_1.all? {|i| board[i] == "X" || board[i] == "O"}
+    vertical_2 = arr_vertical_2.all? {|i| board[i] == "X" || board[i] == "O"}
+    vertical_3 = arr_vertical_3.all? {|i| board[i] == "X" || board[i] == "O"}
+    vertical_1 || vertical_2 || vertical_3
+  end
+
+  def play
+    for i in 0..8
       player_input
-
-    elsif position_taken?(input)
-      puts 'Position is already taken choose another number'
-      player_input
-    elsif player_turn(input)
-      display_board
-      switch_players
+        if diagonals?
+          puts "You won!"
+        else
+          switch_input
+        end   
     end
   end
 end
+
 player = Game.new
 player.players_name
