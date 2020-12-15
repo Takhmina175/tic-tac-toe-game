@@ -46,43 +46,6 @@ attr_accessor :board, :curr_player
         end
     end
 
-    def winning_combination?
-       return true if winning_diagonal? ||winning_vertical? || winning_horizontal?
-    end
 
-    def winning_diagonal?
-        WIN_DIAGONAL.all do |input|
-         if @board[0][input] == @board[1][input] && @board[1][input] == @board[2][input]
-          puts 'Congratulations you won!'
-         end
-        end
-    end 
-
-    def winning_vertical?
-         WIN_VERTICAL.all do |input|
-         if @board[0][input] == @board[1][input]
-          puts 'Congratulations you won!'
-         end
-        end 
-    end
-
-    def winning_horizontal?
-         WIN_HORIZONTAL.each_with_index do |input|
-         if @board[0][input] == @board[1][input] && @board[1][input] == @board[2][input]
-          puts 'Congratulations you won!'
-         end
-        end
-    end
-
-    def full?
-            @board.each do |i|
-                unless i.size == 9
-                end
-            end
-    end
-
-    def draw
-            !winning_combination? && full?
-    end
 
 end
