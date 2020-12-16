@@ -1,9 +1,9 @@
 class Player
-attr_accessor :board, :curr_player
+  attr_accessor :curr_player, :curr_input
 
-  def initialize(board, curr_player)
-    @board = board
+  def initialize
     @curr_player = curr_player
+    @curr_input = 'X'
   end
 
   def players_name
@@ -12,22 +12,20 @@ attr_accessor :board, :curr_player
 
     puts 'Hi player2, what is your name?'
     @player_y = gets.chomp
-
-    @current_player = @player_x
-    player_input
+    @curr_player = @player_y
+    play
   end
 
-  def switch_players
-    @current_player = if @current_player == @player_x
-                        @player_y
-                      else
-                        @player_x
-                      end
-    player_input
+  def switch_names
+    @curr_player = if @curr_player == @player_x
+                     @player_y
+                   else
+                     @player_x
+                   end
   end
 
-  def player_turn(num)
-    @board[num] = if (num % 2).zero?
+  def switch_input
+    @curr_input = if @curr_input == 'X'
                     'O'
                   else
                     'X'
