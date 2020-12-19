@@ -1,9 +1,9 @@
 #!/usr/bin/env ruby
 class Game
-require_relative '../lib/board'
-require_relative '../lib/players'
+  require_relative '../lib/board'
+  require_relative '../lib/players'
 
-attr_accessor :curr_input, :curr_player
+  attr_accessor :curr_input, :curr_player
 
   def initialize
     @board = Board.new
@@ -12,9 +12,9 @@ attr_accessor :curr_input, :curr_player
     @curr_input = 'X'
   end
 
-  def callForPlayers
+  def call_for_players
     @curr_player = @player.players_name
-    play 
+    play
   end
 
   def switch_input
@@ -25,7 +25,7 @@ attr_accessor :curr_input, :curr_player
                   end
   end
 
-  def player_input 
+  def player_input
     puts "#{@curr_player} choose a spot"
     index = gets.chomp.to_i - 1
     if index.negative? || index > 8
@@ -46,6 +46,7 @@ attr_accessor :curr_input, :curr_player
     while i < 9
       player_input
       break if @board.won?(@curr_input)
+
       switch_input
       i += 1
     end
@@ -58,4 +59,4 @@ attr_accessor :curr_input, :curr_player
 end
 
 player = Game.new
-player.callForPlayers
+player.call_for_players

@@ -34,7 +34,7 @@ class Board
     @board[input] == 'X' || @board[input] == 'O'
   end
 
-  def move(position, token='X')
+  def move(position, token = 'X')
     @board[position] = token
   end
 

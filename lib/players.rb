@@ -20,5 +20,4 @@ class Player
                      @player_x
                    end
   end
-
 end
