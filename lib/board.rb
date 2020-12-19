@@ -34,6 +34,10 @@ class Board
     @board[input] == 'X' || @board[input] == 'O'
   end
 
+  def move(position, token='X')
+    @board[position] = token
+  end
+
   def horizontals?(input)
     arr_horizontals1 = WIN_HORIZONTAL[0]
     arr_horizontals2 = WIN_HORIZONTAL[1]
