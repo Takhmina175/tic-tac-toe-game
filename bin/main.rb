@@ -3,26 +3,39 @@ class Game
   require_relative '../lib/board'
   require_relative '../lib/players'
 
-  attr_accessor :curr_input, :curr_player
+  attr_accessor :curr_player, :board
 
   def initialize
-    @board = Board.new
+    @boards = Board.new
     @player = Player.new
+    @board = [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ']
     @curr_player = curr_player
     @curr_input = 'X'
   end
 
-  def call_for_players
-    @curr_player = @player.players_name
+  def display_board
+    puts " #{@board[0]} | #{@board[1]} | #{@board[2]} "
+    puts ' ----------- '
+    puts " #{@board[3]} | #{@board[4]} | #{@board[5]} "
+    puts ' ----------- '
+    puts " #{@board[6]} | #{@board[7]} | #{@board[8]} "
+  end
+
+  def players_name
+    puts 'Hi player1, what is your name?'
+    @player_x = gets.chomp
+    puts 'Hi player2, what is your name?'
+    @player_y = gets.chomp
+    @curr_player = @player_x
     play
   end
 
-  def switch_input
-    @curr_input = if @curr_input == 'X'
-                    'O'
-                  else
-                    'X'
-                  end
+  def switch_names
+    @curr_player = if @curr_player == @player_x
+                     @player_y
+                   else
+                     @player_x
+                   end
   end
 
   def player_input
@@ -31,13 +44,13 @@ class Game
     if index.negative? || index > 8
       puts 'Enter number within a range of 1-9'
       player_input
-    elsif @board.position_taken?(index)
+    elsif @boards.position_taken?(@board, index)
       puts 'Position is already taken choose another number'
       player_input
     else
-      @board.move(index, @curr_input)
-      @board.display_board
-      @curr_player = @player.switch_names
+      @boards.move(@board, index, @curr_input)
+      display_board
+      switch_names
     end
   end
 
@@ -45,13 +58,13 @@ class Game
     i = 0
     while i < 9
       player_input
-      break if @board.won?(@curr_input)
+      break if @boards.won?(@board, @curr_input)
 
-      switch_input
+      @curr_input = @player.switch_input(@curr_input)
       i += 1
     end
-    if @board.won?(@curr_input)
-      puts "Congratulation #{@player.switch_names}, You Won!"
+    if @boards.won?(@board, @curr_input)
+      puts "Congratulation #{switch_names}, You Won!"
     else
       puts "Cat's Game!"
     end
@@ -59,4 +72,4 @@ class Game
 end
 
 player = Game.new
-player.call_for_players
+player.players_name
