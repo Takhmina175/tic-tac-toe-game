@@ -28,22 +28,22 @@ end
 
 def players_name
   puts 'Hi player1, what is your name?'
-  @x = gets.chomp
+  @x = gets.chomp.strip
   @x.empty?
 
   while @x.empty?
     puts "You didn't set your name, please enter your name"
-    name = gets.chomp
+    name = gets.chomp.strip
     @x = name
   end
 
   puts 'Hi player2, what is your name?'
-  @y = gets.chomp
+  @y = gets.chomp.strip
   @y.empty?
 
   while @y.empty?
     puts "You didn't set your name, please enter your name"
-    name = gets.chomp
+    name = gets.chomp.strip
     @y = name
   end
 
@@ -63,7 +63,8 @@ end
 
 def play_game
   while @boards.full?
-    puts "#{@current_player} choose a spot"
+    display_board
+    puts "#{@current_player} Please choos an empty spot in the board by entering 1 ...9:"
     index = input
     if Player.input_range?(index)
       puts 'Enter number within a range of 1-9'
