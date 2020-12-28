@@ -1,16 +1,17 @@
 class Board
-  attr_accessor :board
+  attr_reader :board
 
   def initialize
     @board = [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ']
   end
 
-  def display_board
-    puts " #{@board[0]} | #{@board[1]} | #{@board[2]} "
-    puts ' ----------- '
-    puts " #{@board[3]} | #{@board[4]} | #{@board[5]} "
-    puts ' ----------- '
-    puts " #{@board[6]} | #{@board[7]} | #{@board[8]} "
+  class << self
+    attr_reader :board
+  end
+
+  def reset
+    @board.clear
+    @board = [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ']
   end
 
   WIN_HORIZONTAL = [
@@ -36,6 +37,10 @@ class Board
 
   def move(position, token = 'X')
     @board[position] = token
+  end
+
+  def full?
+    @board.any? { |index| index.nil? || index == ' ' }
   end
 
   def horizontals?(input)
@@ -72,5 +77,9 @@ class Board
 
   def won?(input)
     horizontals?(input) || diagonals?(input) || verticals?(input)
+  end
+
+  def check_for_game_termination?(input)
+    won?(input) || full?
   end
 end
