@@ -4,6 +4,9 @@ require_relative '../lib/players'
 boards = Board.new
 @boards = boards
 
+@x_marker = 'X'
+@o_marker = 'O'
+
 def display_board
   puts " #{@boards.board[0]} | #{@boards.board[1]} | #{@boards.board[2]} "
   puts ' ----------- '
@@ -19,6 +22,14 @@ def switch_names(curr_player)
     @y
   else
     @x
+  end
+end
+
+def switch_marker(marker)
+  if marker == @x_marker
+    @o_marker
+  else
+    @x_marker
   end
 end
 
@@ -40,14 +51,13 @@ def players_name
   puts 'Hi player2, what is your name?'
   @y = gets.chomp.strip
   @y.empty?
-
   while @y.empty?
     puts "You didn't set your name, please enter your name"
     name = gets.chomp.strip
     @y = name
   end
-
   @current_player = @x
+  @marker = @x_marker
 end
 
 def play_again
@@ -55,6 +65,8 @@ def play_again
   response = gets.chomp.capitalize
   if response == 'Y'
     @boards.reset
+    @current_player = @x
+    @marker = @x_marker
     play_game
   else
     puts 'Thank you for game'
@@ -64,16 +76,14 @@ end
 def play_game
   while @boards.full?
     display_board
-    puts "#{@current_player} Please choos an empty spot in the board by entering 1 ...9:"
+    puts "#{@current_player} place '#{@marker}' on the board’s empty cell  by entering 1 - 9"
     index = input
-    if Player.input_range?(index)
-      puts 'Enter number within a range of 1-9'
-    elsif @boards.position_taken?(index)
-      puts 'Sorry, that space is not empty! Please choose another number'
+    if Player.input_range?(index) || @boards.position_taken?(index)
+      play_game
     else
       @boards.move(index, @curr_input)
-      display_board
       @current_player = switch_names(@current_player)
+      @marker = switch_marker(@marker)
     end
     break if @boards.won?(@curr_input)
 
@@ -84,7 +94,7 @@ end
 
 def winning_cond
   if @boards.won?(@curr_input)
-    puts "Congratulation #{switch_names(@current_player)}, You Won!"
+    puts "Congratulation #{switch_names(@current_player)}, '#{switch_marker(@marker)}' Won!"
   else
     puts "Cat's Game!"
   end
