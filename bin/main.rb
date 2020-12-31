@@ -58,6 +58,7 @@ def players_name
   end
   @current_player = @x
   @marker = @x_marker
+  display_message
 end
 
 def play_again
@@ -67,23 +68,30 @@ def play_again
     @boards.reset
     @current_player = @x
     @marker = @x_marker
+    display_message
     play_game
   else
     puts 'Thank you for game'
   end
 end
 
+def display_message
+  display_board
+  puts "#{@current_player} place '#{@marker}' on an empty cell  by entering 1 - 9"
+end
+
 def play_game
   while @boards.full?
-    display_board
-    puts "#{@current_player} place '#{@marker}' on the board’s empty cell  by entering 1 - 9"
     index = input
     if Player.input_range?(index) || @boards.position_taken?(index)
+      display_board
+      puts "#{@current_player} your '#{@marker}' move is invalid please select an empty cell by entering 1..9 "
       play_game
     else
       @boards.move(index, @curr_input)
       @current_player = switch_names(@current_player)
       @marker = switch_marker(@marker)
+      display_message
     end
     break if @boards.won?(@curr_input)
 
@@ -93,6 +101,7 @@ def play_game
 end
 
 def winning_cond
+  display_board
   if @boards.won?(@curr_input)
     puts "Congratulation #{switch_names(@current_player)}, '#{switch_marker(@marker)}' Won!"
   else
