@@ -43,7 +43,7 @@ def players_name
   @x.empty?
 
   while @x.empty?
-    puts "You didn't set your name, please enter your name"
+    puts 'Your input is empty!, Please enter your name'
     name = gets.chomp.strip
     @x = name
   end
@@ -52,7 +52,7 @@ def players_name
   @y = gets.chomp.strip
   @y.empty?
   while @y.empty?
-    puts "You didn't set your name, please enter your name"
+    puts 'Your input is empty!, Please enter your name'
     name = gets.chomp.strip
     @y = name
   end
