@@ -58,52 +58,57 @@ def players_name
   end
   @current_player = @x
   @marker = @x_marker
-  display_message
+  display_board
+end
+
+def invalid_move(input)
+  Player.input_range?(input) || @boards.position_taken?(input)
 end
 
 def play_again
   puts "if you want to continue playing enter 'Y' else 'N' > "
   response = gets.chomp.capitalize
-  if response == 'Y'
+  puts 'Thanks for Game' if response != 'Y'
+  while response == 'Y'
     @boards.reset
     @current_player = @x
     @marker = @x_marker
-    display_message
+    @curr_input = 'X'
+    display_board
     play_game
-  else
-    puts 'Thank you for game'
+    break if response.match(/\w/)
   end
-end
-
-def display_message
-  display_board
-  puts "#{@current_player} place '#{@marker}' on an empty cell  by entering 1 - 9"
 end
 
 def play_game
   while @boards.full?
+    puts "#{@current_player} place '#{@marker}' on an empty cell  by entering 1 - 9"
     index = input
-    if Player.input_range?(index) || @boards.position_taken?(index)
-      display_board
-      puts "#{@current_player} your '#{@marker}' move is invalid please select an empty cell by entering 1..9 "
-      play_game
-    else
-      @boards.move(index, @curr_input)
-      @current_player = switch_names(@current_player)
-      @marker = switch_marker(@marker)
-      display_message
-    end
-    break if @boards.won?(@curr_input)
+    validate_move(index, @current_player, @marker)
+
+    @current_player = switch_names(@current_player)
+    @marker = switch_marker(@marker)
+    break if @boards.won?(@curr_input) || !@boards.full?
 
     @curr_input = Player.switch_input(@curr_input)
   end
   winning_cond
 end
 
-def winning_cond
+def validate_move(index, _current_player, _marker)
+  while Player.input_range?(index) || @boards.position_taken?(index)
+    display_board
+    puts "#{@current_player} your move is invalid please place '#{@marker}' on an empty cell  by entering 1 - 9"
+    index = input
+    break unless invalid_move(index)
+  end
+  @boards.move(index, @curr_input)
   display_board
+end
+
+def winning_cond
   if @boards.won?(@curr_input)
-    puts "Congratulation #{switch_names(@current_player)}, '#{switch_marker(@marker)}' Won!"
+    puts "Congratulation #{switch_names(@current_player)},'#{switch_marker(@marker)}' Won!"
   else
     puts "Cat's Game!"
   end

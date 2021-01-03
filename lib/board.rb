@@ -78,8 +78,4 @@ class Board
   def won?(input)
     horizontals?(input) || diagonals?(input) || verticals?(input)
   end
-
-  def check_for_game_termination?(input)
-    won?(input) || full?
-  end
 end
