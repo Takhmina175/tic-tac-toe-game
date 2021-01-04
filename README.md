@@ -7,6 +7,14 @@
 
 - Two players are involved in the game
 - Each player has to enter their names one by one (Note!  You can not leave your name empty)
+- displaying a borad <br>
+
+  "  |  |  " <br>
+  "-----------" <br>
+  "  |  |  " <br>
+  "-----------" <br>
+  "  |  |  " <br>
+
 - The board will be displayed on the screen and the first player will be asked for selecting an empty cell on the board by selecting 1 – 9 number (Note: You cannot enter the number above or below the given range or select occupied space)
 - The first player’s move will be marked as  ‘X’ and the second player’s move will be marked as ‘O’
 - Each play takes a turn to place either an 'X' or 'O' (a marker) on the board 
@@ -33,13 +41,7 @@ puts "Welcome to Tic Tac Toe!" <br>
 board = [" ", " ", " ", " ", " ", " ", " ", " ", " "]
 
 
-def display_board(board) <br>
-  puts " # | # | # " <br>
-  puts "-----------" <br>
-  puts " # | # | # " <br>
-  puts "-----------" <br>
-  puts " # | # | # " <br>
-end
+
 
 ## Author
 
