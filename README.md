@@ -15,7 +15,7 @@
   "-----------" <br>
   " # | # | # " <br>
   
-- The board will be displayed on the screen and the first player will be asked for select an empty cell on the board by choosing one number between 1 - 9 (Please note that you cannot enter the number above or below the given range or select occupied cell).
+- The board will be displayed on the screen and the first player will be asked to select an empty cell on the board by choosing one number between 1 - 9 (Please note that you cannot enter the number above or below the given range or select occupied cell).
 - The first player’s move will be marked as  ‘X’ and the second player’s move will be marked as ‘O’.
 - Each player takes a turn to place either an 'X' or 'O' (a marker) on the board. 
 - The winner will be announced when all three cells horizontally or vertically or diagonally will be filled with either ‘X’ | ‘O’.
