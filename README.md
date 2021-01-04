@@ -21,8 +21,8 @@
 - The winner will be announced when all three cells horizontally or vertically or diagonally will be filled with either ‘X’ | ‘O’.
 - If there was no winner the game is considered a Tie.
 - In both winning or draw conditions, the game will ask players whether or not they want to continue playing by selecting ‘Y’ as a positive response and any other character as a negative response.
-- If the answer is positive, the board will reset and the first player continues playing.
-- If the response was negative the “Thanks for the game”  message will be displayed and the game will be terminated.   
+- If the answer is positive, the board will reset and the first player will continue playing.
+- If the response is negative the “Thanks for the game”  message will be displayed and the game will be terminated.   
 
 ## Built With
 
