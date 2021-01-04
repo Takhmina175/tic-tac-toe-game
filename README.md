@@ -6,7 +6,7 @@
 # Steps for Playing Tic-Tac-Toe game
 
 - Two players are involved in the game
-- Each player has to enter their names sequentially (Note!  You can not leave your name empty)
+- Each player has to enter their names one by one (Note!  You can not leave your name empty)
 - The board will be displayed on the screen and the first player will be asked for selecting an empty cell on the board by selecting 1 – 9 number (Note: You cannot enter the number above or below the given range or select occupied space)
 - The first player’s move will be marked as  ‘X’ and the second player’s move will be marked as ‘O’
 - Each play takes a turn to place either an 'X' or 'O' (a marker) on the board 
