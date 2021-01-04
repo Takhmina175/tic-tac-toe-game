@@ -7,7 +7,7 @@
 
 - Two players are involved in the game
 - Each player has to enter their names one by one (Note!  You can not leave your name empty)
-- Playing borad <br>
+- Playing board <br>
 
   " # | # | # " <br>
   "-----------" <br>
