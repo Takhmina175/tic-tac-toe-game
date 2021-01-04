@@ -15,10 +15,10 @@
   "-----------" <br>
   " # | # | # " <br>
   
-- The board will be displayed on the screen and the first player will be asked for selecting an empty cell on the board by selecting 1 – 9 number (Note: You cannot enter the number above or below the given range or select occupied space)
-- The first player’s move will be marked as  ‘X’ and the second player’s move will be marked as ‘O’
-- Each play takes a turn to place either an 'X' or 'O' (a marker) on the board 
-- The winner will be announced when all three cells horizontally or vertically or diagonally will be filled with either ‘X’ | ‘O’ 
+- The board will be displayed on the screen and the first player will be asked for select an empty cell on the board by choosing one number between 1 - 9 (Note: You cannot enter the number above or below the given range or select occupied space).
+- The first player’s move will be marked as  ‘X’ and the second player’s move will be marked as ‘O’.
+- Each player takes a turn to place either an 'X' or 'O' (a marker) on the board. 
+- The winner will be announced when all three cells horizontally or vertically or diagonally will be filled with either ‘X’ | ‘O’.
 - If there was no winner the game is considered a Tie.
 - In both winning or draw conditions, the game will ask players whether or not they want to continue playing by selecting ‘Y’ as a positive response and any other character as a negative response.
 - If the answer is positive, the board will reset and the first player continues playing.
